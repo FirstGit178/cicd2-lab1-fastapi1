@@ -9,6 +9,10 @@ users: list[UserCreate] = []
 def health():
     return{"status": "ok"}
 
+@app.get("/hello")
+def hello():
+    return{"message": "Hello from FastAPI"}
+
 @app.post("/api/users", status_code=status.HTTP_201_CREATED)
 def add_user(new_user: UserCreate):
     for existing_user in users:
