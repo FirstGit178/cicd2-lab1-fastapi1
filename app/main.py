@@ -48,7 +48,7 @@ def delete_user(user_id: int):
 
     raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, 
-            detail="User not found",
+            detail="User not found", 
         )
 
 
