@@ -8,8 +8,12 @@ def user_payload(uid=1, name="Paul", email="paul@atu.ie", age=25, student_id="S1
             "age" : age, 
             "student_id" : student_id,
             }
-
-
+def test_hello_endpoint(client):
+    response = client.get("/hello")
+    
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello from FastAPI"}
+   
 def test_create_user_returns_201(client):
     response = client.post("/api/users", json= user_payload())
 
@@ -77,5 +81,5 @@ def test_deleted_user_can_no_longer_be_retrieved(client):
     client.delete("/api/users/21")
 
     response = client.get("/api/users/21")
-    
+
     assert response.status_code == 404
