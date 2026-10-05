@@ -8,7 +8,8 @@ StudentIdStr = Annotated[str, StringConstraints(pattern=r"^S\d{7}$")]
 
 #This arrives in, no id is known
 class UserCreate(BaseModel):
-   # user_id: int = Field(gt=0)    I missed removing this and it cost me hours --XD ;-D    name: NameStr
+   # user_id: int = Field(gt=0)    I missed removing this and it cost me hours --XD ;-D    
+    name: NameStr
     email: EmailStr
     age: int = Field(gt=18, lt=120)
     student_id: StudentIdStr
