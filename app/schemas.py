@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from pydantic import BaseModel,  EmailStr, Field, StringConstraints
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints
 
 #We want a class that describes incoming data and a class that describes responses.
 NameStr =Annotated[str, StringConstraints(min_length=2, max_length=50)] 
@@ -8,8 +8,7 @@ StudentIdStr = Annotated[str, StringConstraints(pattern=r"^S\d{7}$")]
 
 #This arrives in, no id is known
 class UserCreate(BaseModel):
-    user_id: int = Field(gt=0)
-    name: NameStr
+   # user_id: int = Field(gt=0)    I missed removing this and it cost me hours --XD ;-D    name: NameStr
     email: EmailStr
     age: int = Field(gt=18, lt=120)
     student_id: StudentIdStr
