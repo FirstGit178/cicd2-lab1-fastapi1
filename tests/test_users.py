@@ -21,7 +21,7 @@ def test_create_user_returns_201(client):
     data = response.json()
     assert data["id"] == 1 
     assert data["name"] == "Paul"
-    assert data["email"] == "paul@atu.ie"
+    assert data["email"] == "paul@atu.ie"  #should i remove this?...
 
 def test_duplicate_user_id_returns_409(client):
     client.post("/api/users", json=user_payload())
@@ -52,7 +52,7 @@ def test_get_users_returns_created_users(client):
 def test_get_existing_user_returns_200(client):
     data = client.post("/api/users", json=user_payload())
     user_id = data.json()["id"]
-    response = client.get(f"/api/users/{user_id}") #added f as prompted to get test to pass
+    response = client.get(f"/api/users/{user_id}") 
 
     assert response.status_code == 200
     assert response.json()["id"] == user_id 
