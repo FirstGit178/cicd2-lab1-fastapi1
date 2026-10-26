@@ -36,3 +36,20 @@ project-name/
 ├── README.md
 └── .gitignore
 ```
+
+## Lab 5 — User API and Product Service
+
+This project runs two FastAPI services:
+
+- The **User API** runs on port 8000.
+- The **Product Service** runs on port 8001.
+- The User API contacts the Product Service to get product information.
+
+### Start the services
+
+Open two terminals in the project folder.
+
+In Terminal 1, start the Product Service:
+
+```bash
+python -m uvicorn product_service.main:app --host 0.0.0.0 --port 8001 --reload
