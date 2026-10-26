@@ -59,3 +59,28 @@ def test_remote_service_unavailable(client):
         assert response.status_code == 503
     finally:
         app.dependency_overrides.pop(get_product_fetcher, None)
+
+
+def fake_product_server_error(product_id: int):
+    request = httpx.Request(
+        "GET", f"http://example.test/products/{product_id}"
+    )
+    response = httpx.Response(500, request=request)
+    raise httpx.HTTPStatusError(
+        "Product service error",
+        request=request,
+        response=response,
+    )
+
+
+def provide_server_error_product():
+    return fake_product_server_error
+
+
+def test_remote_product_server_error_returns_502(client):
+    app.dependency_overrides[get_product_fetcher] = provide_server_error_product
+    try:
+        response = client.get("/api/products/1")
+        assert response.status_code == 502
+    finally:
+        app.dependency_overrides.pop(get_product_fetcher, None)

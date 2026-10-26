@@ -85,5 +85,6 @@ def get_remote_product(
     except httpx.HTTPStatusError as exc:
         if exc.response.status_code == 404:
             raise HTTPException(404, "Product not found") from exc
+        raise HTTPException(502, "Product service error") from exc
     except httpx.RequestError as exc:
         raise HTTPException(503, "Product service unavailable") from exc
