@@ -53,3 +53,32 @@ In Terminal 1, start the Product Service:
 
 ```bash
 python -m uvicorn product_service.main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+In Terminal 2, start the User API:
+
+```bash
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Keep both terminals running. In Codespaces, open each port from the Ports tab
+and add `/docs` to its URL to open that service's Swagger page.
+
+### Get a product through the User API
+
+Use the User API endpoint:
+
+```text
+GET /api/products/{product_id}
+```
+
+For example, `GET /api/products/1` returns the Laptop product. The User API
+makes an HTTP request to the Product Service; it does not access the Product
+Service's data directly.
+
+### Product Service address
+
+`PRODUCT_SERVICE_URL` tells the User API where the Product Service is running.
+By default, it is `http://127.0.0.1:8001`, which works when both services run
+in the same Codespace. In another setup, set this variable to the Product
+Service's address.
